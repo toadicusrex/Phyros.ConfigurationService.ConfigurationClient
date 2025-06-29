@@ -28,7 +28,7 @@ class Build : NukeBuild
 	readonly string NuGetApiKey = Environment.GetEnvironmentVariable("PACKAGES_API_KEY");
 	readonly string NuGetSource = "https://nuget.pkg.github.com/toadicusrex/index.json";
 
-	[Solution("src/Phyros.OrganizationalUnits.sln")] readonly Solution Solution;
+	[Solution] readonly Solution Solution;
 	[GitVersion] readonly GitVersion GitVersion;
 	[Parameter("NuGet version from GitVersion")] readonly string GitVersionNuGetVersion;
 
