@@ -1,1 +1,1 @@
-# Phyros.Configuration.Client
+# Phyros.ConfigurationService.ConfigurationClient

@@ -1,7 +1,7 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "Phyros.Configuration.Client.Tester": {
+    "Phyros.ConfigurationService.ConfigurationClient.Tester": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

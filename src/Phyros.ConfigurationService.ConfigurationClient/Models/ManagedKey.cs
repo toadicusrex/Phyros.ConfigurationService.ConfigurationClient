@@ -1,6 +1,6 @@
 ﻿using Phyros.OrganizationalUnits;
 
-namespace Phyros.Configuration.Client.Models;
+namespace Phyros.ConfigurationService.ConfigurationClient.Models;
 public class ManagedKey
 {
 	public static string GetManagedKey(OrganizationalUnit organizationalUnit, string key)

@@ -1,4 +1,4 @@
 {
   "$schema": "./build.schema.json",
-  "Solution": "src/Phyros.Configuration.Client.sln"
+  "Solution": "src/Phyros.ConfigurationService.ConfigurationClient.sln"
 }
