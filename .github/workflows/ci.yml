@@ -18,6 +18,9 @@ name: ci
 
 on: [push, workflow_dispatch, pull_request]
 
+permissions:
+  contents: write
+
 jobs:
   ubuntu-latest:
     name: ubuntu-latest
@@ -26,6 +29,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
         uses: actions/cache@v4
         with:
@@ -33,13 +37,38 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
+      - name: Get version from GitVersion
+        id: gitversion
+        run: |
+          set -e
+          dotnet tool install --global GitVersion.Tool
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          dotnet-gitversion /output json > gitversion.json || (echo "GitVersion failed:"; cat gitversion.json || true; exit 1)
+          cat gitversion.json
+          echo "version=$(jq -r .SemVer gitversion.json)" >> $GITHUB_OUTPUT
+      - name: Check required environment variables
+        run: |
+          if [ -z "${{ secrets.PACKAGES_API_KEY }}" ]; then echo "PACKAGES_API_KEY is missing!"; exit 1; fi
+          if [ -z "${{ secrets.GITHUB_TOKEN }}" ]; then echo "GITHUB_TOKEN is missing!"; exit 1; fi
+          if [ -z "${{ steps.gitversion.outputs.version }}" ]; then echo "GITVERSION_NUGET_VERSION is missing!"; exit 1; fi
       - name: 'Run: Publish'
-        run: ./build.cmd Publish
+        run: ./build.cmd Publish --host GitHubActions
         env:
-          NuGetPackageSourceCredentials_PhyrosGitHub: ${{ secrets.NUGET_PACKAGE_SOURCE_CREDENTIALS_PHYROS_GITHUB }}
+          PACKAGES_API_KEY: ${{ secrets.PACKAGES_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITVERSION_NUGET_VERSION: ${{ steps.gitversion.outputs.version }}
       - name: 'Publish: output'
         uses: actions/upload-artifact@v4
         with:
-          name: output
-          path: output
+          name: nuget-packages
+          path: |
+            artifacts/*.nupkg
+            artifacts/*.snupkg
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag v${{ steps.gitversion.outputs.version }}
+          git push origin v${{ steps.gitversion.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
