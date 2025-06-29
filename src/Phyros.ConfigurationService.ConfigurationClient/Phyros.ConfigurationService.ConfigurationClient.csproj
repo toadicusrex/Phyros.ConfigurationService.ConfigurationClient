@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<IsPackable>true</IsPackable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<UserSecretsId>10e6764f-8dee-4d3a-ae09-2f3457591e6d</UserSecretsId>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Models\ManagedKey.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="MassTransit" />
+	  <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
+	  <PackageReference Include="Microsoft.Extensions.Caching.Memory" />
+	  <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+	  <PackageReference Include="Microsoft.Extensions.Http.Polly" />
+	  <PackageReference Include="morelinq" />
+	  <PackageReference Include="Phyros.DomainEventModels.ConfigurationEvents" />
+	  <PackageReference Include="Phyros.OrganizationalUnits" />
+	  <PackageReference Include="Serilog" />
+	  <PackageReference Include="System.Text.Encodings.Web" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+	  <PackageReference Include="Microsoft.Extensions.Http" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,7 @@
+{
+	"organizationalUnit": "org.one",
+	"key": "Key1",
+	"value": "Value 1",
+	"valueType": "ConnectionString",
+	"locked": true
+}

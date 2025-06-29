@@ -1,0 +1,5 @@
+﻿using Phyros.OrganizationalUnits;
+
+namespace Phyros.ConfigurationService.ConfigurationClient.ConfigurationManagement.EventHandlers;
+
+public delegate void ConfigurationSettingDeletedEventHandler(OrganizationalUnit organizationalUnit, string configurationSettingName);

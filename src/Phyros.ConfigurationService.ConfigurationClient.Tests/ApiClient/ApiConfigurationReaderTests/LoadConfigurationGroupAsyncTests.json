@@ -1,0 +1,16 @@
+[
+	{
+		"organizationalUnit": "org.one",
+		"key": "Key1",
+		"value": "Value 1",
+		"valueType": "ConnectionString",
+		"locked": true
+	},
+	{
+		"organizationalUnit": "org.two",
+		"key": "Key2",
+		"value": "Value 2",
+		"valueType": "string",
+		"locked": true
+	}
+]

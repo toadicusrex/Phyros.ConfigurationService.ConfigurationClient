@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ConfigurationManagement\PhyrosConfigurationSourceTests\**" />
+    <Compile Remove="ConfigurationManagement\ConfigurationStateTests\**" />
+    <EmbeddedResource Remove="ConfigurationManagement\PhyrosConfigurationSourceTests\**" />
+    <EmbeddedResource Remove="ConfigurationManagement\ConfigurationStateTests\**" />
+    <None Remove="ConfigurationManagement\PhyrosConfigurationSourceTests\**" />
+    <None Remove="ConfigurationManagement\ConfigurationStateTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Phyros.ConfigurationService.ConfigurationClient\Phyros.ConfigurationService.ConfigurationClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ApiClient\ApiConfigurationReaderTests\GetConfigurationSettingAsyncTests.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ApiClient\ApiConfigurationReaderTests\AddAdditionalConfigurationSettingAsyncTests.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ApiClient\ApiConfigurationReaderTests\LoadConfigurationGroupAsyncTests.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
